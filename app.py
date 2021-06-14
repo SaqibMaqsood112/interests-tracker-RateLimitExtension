@@ -2,8 +2,13 @@
 import boto3
 import json
 from sqlalchemy import create_engine
+import yaml
 
 
+## Reading in Config File
+def read_config(file_path= 'config.yaml'):
+    with open(file_path, "r") as f:
+        return yaml.safe_load(f)
 
 ## Building Aurora Connection
 # Get DB Creds
@@ -25,9 +30,10 @@ def get_db_connection(ssm_param):
     return conn
 
 # Establish connection
-def establish_conn():
+def establish_conn(config):
     try:
-        param = "/dev/ds/aurora/postgres_ratelimits_only"
+        param = config['DB Connection']['param_path']
+        #param = "/dev/ds/aurora/postgres_ratelimits_only"
         conn = get_db_connection(param) # Establish Conn
         print("Aurora Connection Successfully Established")
     except Exception as e:
@@ -84,7 +90,8 @@ def input_data_validation(event):
 def lambda_handler(event, context):
     try:
         if input_data_validation(event) == 200:
-            conn = establish_conn()
+            config = read_config()
+            conn = establish_conn(config)
             status = add_ext(conn, event)
             return {
                 'statusCode': 200,
@@ -103,13 +110,13 @@ def lambda_handler(event, context):
 
 # =============================================================================
 ## For local testing 
-#event = {	"app_name": "interest tracker",
-#	"env_type": "prod",
-#	"data_source": "PeopleDataLab",
-#	"daily_rate_limit_ext": 160,
-#	"from_data": "2021-05-01",
-#	"to_date": "2021-05-30"}
-#context = ''
-#lambda_handler(event, context)
+event = {	"app_name": "interest tracker",
+	"env_type": "prod",
+	"data_source": "PeopleDataLab",
+	"daily_rate_limit_ext": 1004,
+	"from_data": "2021-05-01",
+	"to_date": "2021-05-30"}
+context = ''
+lambda_handler(event, context)
 # =============================================================================
 
