@@ -47,7 +47,7 @@ def add_ext(conn, event):
         add_ext_query = """ insert into ds.ds_sources_ratelimits_extensions (app_name, env_type, data_source,
                             daily_rate_limit_ext, valid_from_UTC, valid_to_UTC) values ('{}','{}', '{}', {}, '{}',
                             '{}')""".format(event['app_name'], event['env_type'], event['data_source'],
-                            event['daily_rate_limit_ext'], event['from_data'], event['to_date'])
+                            event['daily_rate_limit_ext'], event['from_date'], event['to_date'])
         conn.execute(add_ext_query)
         status = "Specified rate limit extensions has been successfully registered"
         print("Specified rate limit extensions has been successfully registered")
@@ -114,7 +114,7 @@ event = {	"app_name": "interest tracker",
 	"env_type": "prod",
 	"data_source": "PeopleDataLab",
 	"daily_rate_limit_ext": 1004,
-	"from_data": "2021-05-01",
+	"from_date": "2021-05-01",
 	"to_date": "2021-05-30"}
 context = ''
 lambda_handler(event, context)
