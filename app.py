@@ -116,10 +116,10 @@ def lambda_handler(event, context):
                 'body': status
                 }
         else:
-            {
+            return {
                 'statusCode': 422,
                 #'isBase64Encoded':False,
-                'body': input_data_validation(event)
+                'body': input_data_validation(request)
                 }
     except Exception as err:
         return {
@@ -135,9 +135,9 @@ def lambda_handler(event, context):
 # For local testing
 
 # event = {"app_name": "interest tracker",
-#  	"env_type": "prod",
+#  	"env_type": "prod1",
 #  	"data_source": "PeopleDataLab",
-#  	"daily_rate_limit_ext": 1124,
+#  	"daily_rate_limit_ext": 1132,
 #  	"from_date": "2021-05-01",
 #  	"to_date": "2021-05-30"}
 # context = ''
@@ -148,6 +148,6 @@ def lambda_handler(event, context):
 # =============================================================================
 # For Lambda Proxy based Payload
 
-# event = {'resource': '/', 'path': '/', 'httpMethod': 'POST', 'headers': None, 'multiValueHeaders': None, 'queryStringParameters': None, 'multiValueQueryStringParameters': None, 'pathParameters': None, 'stageVariables': None, 'requestContext': {'resourceId': 'qn3iort26g', 'resourcePath': '/', 'httpMethod': 'POST', 'extendedRequestId': 'BE4NgF-vvHcFsiA=', 'requestTime': '17/Jun/2021:15:43:05 +0000', 'path': '/', 'accountId': '664813711721', 'protocol': 'HTTP/1.1', 'stage': 'test-invoke-stage', 'domainPrefix': 'testPrefix', 'requestTimeEpoch': 1623944585475, 'requestId': '75513268-78b4-41ba-bd0a-70b211d27087', 'identity': {'cognitoIdentityPoolId': None, 'cognitoIdentityId': None, 'apiKey': 'test-invoke-api-key', 'principalOrgId': None, 'cognitoAuthenticationType': None, 'userArn': 'arn:aws:sts::664813711721:assumed-role/sendoso-datateam-admin-all/saqib.maqsood', 'apiKeyId': 'test-invoke-api-key-id', 'userAgent': 'aws-internal/3 aws-sdk-java/1.11.1030 Linux/5.4.102-52.177.amzn2int.x86_64 OpenJDK_64-Bit_Server_VM/25.292-b10 java/1.8.0_292 vendor/Oracle_Corporation cfg/retry-mode/legacy', 'accountId': '664813711721', 'caller': 'AROAZVSP4GFUUP52JUSB5:saqib.maqsood', 'sourceIp': 'test-invoke-source-ip', 'accessKey': 'ASIAZVSP4GFU3VIHWD3A', 'cognitoAuthenticationProvider': None, 'user': 'AROAZVSP4GFUUP52JUSB5:saqib.maqsood'}, 'domainName': 'testPrefix.testDomainName', 'apiId': 'yqza956v43'}, 'body': '{\n  "app_name": "interest tracker",\n  "env_type": "prod",\n  "data_source": "PeopleDataLab",\n  "daily_rate_limit_ext": 1125,\n  "from_date": "2021-05-01",\n  "to_date": "2021-05-30"\n}', 'isBase64Encoded': False}
+# event = {'resource': '/', 'path': '/', 'httpMethod': 'POST', 'headers': None, 'multiValueHeaders': None, 'queryStringParameters': None, 'multiValueQueryStringParameters': None, 'pathParameters': None, 'stageVariables': None, 'requestContext': {'resourceId': 'qn3iort26g', 'resourcePath': '/', 'httpMethod': 'POST', 'extendedRequestId': 'BE4NgF-vvHcFsiA=', 'requestTime': '17/Jun/2021:15:43:05 +0000', 'path': '/', 'accountId': '664813711721', 'protocol': 'HTTP/1.1', 'stage': 'test-invoke-stage', 'domainPrefix': 'testPrefix', 'requestTimeEpoch': 1623944585475, 'requestId': '75513268-78b4-41ba-bd0a-70b211d27087', 'identity': {'cognitoIdentityPoolId': None, 'cognitoIdentityId': None, 'apiKey': 'test-invoke-api-key', 'principalOrgId': None, 'cognitoAuthenticationType': None, 'userArn': 'arn:aws:sts::664813711721:assumed-role/sendoso-datateam-admin-all/saqib.maqsood', 'apiKeyId': 'test-invoke-api-key-id', 'userAgent': 'aws-internal/3 aws-sdk-java/1.11.1030 Linux/5.4.102-52.177.amzn2int.x86_64 OpenJDK_64-Bit_Server_VM/25.292-b10 java/1.8.0_292 vendor/Oracle_Corporation cfg/retry-mode/legacy', 'accountId': '664813711721', 'caller': 'AROAZVSP4GFUUP52JUSB5:saqib.maqsood', 'sourceIp': 'test-invoke-source-ip', 'accessKey': 'ASIAZVSP4GFU3VIHWD3A', 'cognitoAuthenticationProvider': None, 'user': 'AROAZVSP4GFUUP52JUSB5:saqib.maqsood'}, 'domainName': 'testPrefix.testDomainName', 'apiId': 'yqza956v43'}, 'body': '{\n  "app_name": "interest tracker",\n  "env_type": "prod1",\n  "data_source": "PeopleDataLab",\n  "daily_rate_limit_ext": 1125,\n  "from_date": "2021-05-01",\n  "to_date": "2021-05-30"\n}', 'isBase64Encoded': False}
 
 # =============================================================================
